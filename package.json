@@ -1,7 +1,7 @@
 {
   "name": "claude-usage-hud",
   "productName": "Claude Usage HUD",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small panel on the edge of your Windows screen showing your Claude 5-hour / weekly limits, token usage and activity. 停在螢幕邊緣的 Claude 用量面板。",
   "main": "src/main.js",
   "private": true,

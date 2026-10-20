@@ -35,7 +35,12 @@ A small panel that lives on the right edge of your Windows screen and shows how 
 
 ## Privacy
 
-Everything stays on your computer. The only network request is to Anthropic's usage endpoint (`api.anthropic.com/api/oauth/usage`), made with your existing Claude Code login, every 5 minutes. The login file is only read, never modified. Token statistics come from Claude Code's local transcripts (`~/.claude/projects`).
+Everything stays on your computer. Network requests go only to Anthropic:
+
+- every 5 minutes, the usage endpoint (`api.anthropic.com/api/oauth/usage`) with your existing Claude Code login;
+- when that login has expired (about every 8 hours), Anthropic's token endpoint (`platform.claude.com/v1/oauth/token`) to renew it — exactly as Claude Code does — and the renewed login is saved back to `~/.claude/.credentials.json` so Claude Code keeps working too. This matters if you use Claude Code through the Claude desktop app, which doesn't update that file. It only renews a login that has actually expired, never overwrites a login Claude Code just renewed, and leaves every other field untouched.
+
+Token statistics come from Claude Code's local transcripts (`~/.claude/projects`).
 
 This is an unofficial community project, not affiliated with Anthropic. The usage endpoint is undocumented and may change.
 
@@ -75,7 +80,12 @@ This is an unofficial community project, not affiliated with Anthropic. The usag
 
 ### 隱私
 
-所有資料都留在你的電腦上。唯一的網路連線是每 5 分鐘用你現有的 Claude Code 登入查詢一次 Anthropic 的用量介面（`api.anthropic.com/api/oauth/usage`）。登入檔只讀取、不修改。Token 統計來自 Claude Code 在本機的對話紀錄（`~/.claude/projects`）。
+所有資料都留在你的電腦上，網路連線只會連到 Anthropic：
+
+- 每 5 分鐘用你現有的 Claude Code 登入，查詢一次用量介面（`api.anthropic.com/api/oauth/usage`）。
+- 登入過期時（大約每 8 小時），用 Anthropic 的換發介面（`platform.claude.com/v1/oauth/token`）換新登入，做法和 Claude Code 完全相同，並把新登入存回 `~/.claude/.credentials.json`，讓 Claude Code 也能繼續用。如果你是透過 Claude 桌面版使用 Claude Code，這點特別重要，因為桌面版不會更新這個檔案。只有登入真的過期時才會換新，不會覆蓋 Claude Code 剛換好的登入，檔案裡其他欄位也都原樣保留。
+
+Token 統計來自 Claude Code 在本機的對話紀錄（`~/.claude/projects`）。
 
 這是非官方的社群專案，與 Anthropic 無關。用量介面沒有公開文件，之後可能變動。
 

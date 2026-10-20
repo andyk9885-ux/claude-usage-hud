@@ -46,7 +46,7 @@ const STRINGS = {
     err: {
       "no-login": ["找不到 Claude Code 的登入資料。", "在終端機執行 claude 並登入一次，這裡就會開始顯示。"],
       "bad-login": ["Claude Code 的登入檔讀不懂。", "重新登入一次 Claude Code 通常就能修好。"],
-      expired: ["Claude Code 的登入已過期。", "打開 Claude Code（或 Claude 桌面版的 Code 分頁）用一下，它會自動更新登入，這裡就會恢復。"],
+      expired: ["Claude Code 的登入已失效，自動更新也沒成功。", "在終端機執行 claude，再輸入 /login 重新登入一次，這裡就會恢復。"],
       "rate-limited": (m) => ["Anthropic 暫時限制了查詢次數。", `${m} 分鐘後會自動再查一次，不用做任何事。`],
       network: ["連不上 Anthropic。", "請確認網路正常，稍後會自動再試。"],
       other: (detail) => ["查詢用量上限失敗" + (detail ? `（${detail}）` : "") + "。", "稍後會自動再試；一直失敗的話，可能是 Anthropic 改了介面。"],
@@ -110,7 +110,7 @@ const STRINGS = {
     err: {
       "no-login": ["Couldn't find a Claude Code login.", "Run claude in a terminal and sign in once — usage will show up here."],
       "bad-login": ["Couldn't read the Claude Code login file.", "Signing in to Claude Code again usually fixes this."],
-      expired: ["Your Claude Code login has expired.", "Open Claude Code (or the Code tab in the Claude desktop app) and use it briefly — it refreshes the login and this recovers."],
+      expired: ["Your Claude Code login is no longer valid, and refreshing it automatically didn't work.", "Run claude in a terminal and type /login to sign in again — this will recover."],
       "rate-limited": (m) => ["Anthropic is limiting how often usage can be checked.", `It'll check again automatically in ${m} min — nothing to do.`],
       network: ["Can't reach Anthropic.", "Check your internet connection — it'll retry automatically."],
       other: (detail) => ["Couldn't check usage limits" + (detail ? ` (${detail})` : "") + ".", "It'll retry automatically. If this keeps happening, Anthropic may have changed the API."],
