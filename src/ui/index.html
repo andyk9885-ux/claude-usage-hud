@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<meta name="color-scheme" content="light dark">
+<title>Claude 用量監視器</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 收起：平常只露出邊緣的把手，滑鼠碰到才滑出小標籤 -->
+  <div id="dock">
+    <div id="handle" aria-hidden="true"><i></i></div>
+    <div id="tab" role="button" tabindex="0" data-i18n-aria="tabAria">
+      <div class="mini" id="mini-5h">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="trk" cx="22" cy="22" r="18"/><circle class="arc" cx="22" cy="22" r="18" pathLength="100"/></svg>
+        <b>–</b><span data-i18n="mini5h"></span>
+      </div>
+      <div class="mini" id="mini-7d">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><circle class="trk" cx="22" cy="22" r="18"/><circle class="arc" cx="22" cy="22" r="18" pathLength="100"/></svg>
+        <b>–</b><span data-i18n="mini7d"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 展開：完整面板 -->
+  <div id="panel" role="dialog" data-i18n-aria="panel">
+    <header>
+      <h1><i class="mark" aria-hidden="true"></i><span data-i18n="panel"></span><em id="plan"></em></h1>
+      <div class="actions">
+        <button id="btn-refresh" data-i18n-aria="refresh" data-i18n-title="refresh"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button>
+        <button id="btn-settings" aria-expanded="false" data-i18n-aria="settings" data-i18n-title="settings"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></button>
+        <button id="btn-collapse" data-i18n-aria="collapse" data-i18n-title="collapse"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </header>
+
+    <div id="settings">
+      <div class="settings-in">
+        <label class="switch-row"><span data-i18n="openAtLogin"></span><input type="checkbox" id="opt-login"><i class="switch" aria-hidden="true"></i></label>
+        <div class="opt">
+          <span class="opt-label" id="lbl-lang" data-i18n="language"></span>
+          <span class="seg" id="opt-lang" role="group" aria-labelledby="lbl-lang">
+            <button data-l="system" data-i18n="themeSystem"></button><button data-l="zh" lang="zh-Hant">中文</button><button data-l="en" lang="en">English</button>
+          </span>
+        </div>
+        <div class="opt">
+          <span class="opt-label" id="lbl-theme" data-i18n="appearance"></span>
+          <span class="seg" id="opt-theme" role="group" aria-labelledby="lbl-theme">
+            <button data-t="system" data-i18n="themeSystem"></button><button data-t="light" data-i18n="themeLight"></button><button data-t="dark" data-i18n="themeDark"></button>
+          </span>
+        </div>
+        <div class="opt">
+          <span class="opt-label" id="lbl-color" data-i18n="colorLabel"></span>
+          <div class="swatches" id="opt-color" role="radiogroup" aria-labelledby="lbl-color"></div>
+        </div>
+        <p class="hint" data-i18n="hint"></p>
+        <button id="btn-quit" class="quiet" data-i18n="quit"></button>
+      </div>
+    </div>
+
+    <main id="scroll">
+      <section id="limits" aria-labelledby="h-limits">
+        <h2 id="h-limits"><span data-i18n="limitsTitle"></span><small id="limits-time"></small></h2>
+        <div id="limits-msg"></div>
+        <div id="meters"></div>
+        <p id="breakdown"></p>
+      </section>
+
+      <section aria-labelledby="h-tokens">
+        <h2><span id="h-tokens" data-i18n="tokensTitle"></span>
+          <span class="seg" id="range" role="group" data-i18n-aria="rangeAria">
+            <i class="seg-pill" aria-hidden="true"></i>
+            <button data-r="today" data-i18n="rToday"></button><button data-r="7" data-i18n="r7"></button><button data-r="30" data-i18n="r30"></button><button data-r="all" data-i18n="rAll"></button>
+          </span>
+        </h2>
+        <div class="totals">
+          <div><b id="tok-total">–</b><span data-i18n="totTokens"></span></div>
+          <div><b id="tok-cost">–</b><span data-i18n="totCost"></span></div>
+        </div>
+        <p class="tok-split" id="tok-split"></p>
+        <dl class="facts" id="facts"></dl>
+      </section>
+
+      <section aria-labelledby="daily-title">
+        <h2 id="daily-title"></h2>
+        <div class="bars" id="daily"></div>
+        <div class="bars-axis" id="daily-axis"></div>
+      </section>
+
+      <section aria-labelledby="h-models">
+        <h2 id="h-models" data-i18n="modelsTitle"></h2>
+        <div id="models"></div>
+      </section>
+
+      <section aria-labelledby="h-heat">
+        <h2><span id="h-heat" data-i18n="heatTitle"></span><small data-i18n="heatSub"></small></h2>
+        <div class="heat-wrap"><div class="heat-days" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div id="heat"></div></div>
+        <div class="heat-legend" aria-hidden="true"><span data-i18n="heatLess"></span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span data-i18n="heatMore"></span></div>
+      </section>
+
+      <p class="foot" data-i18n="foot"></p>
+    </main>
+  </div>
+
+  <div id="tip" role="tooltip"></div>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "claude-usage-hud",
+  "productName": "Claude Usage HUD",
+  "version": "1.0.0",
+  "description": "A small panel on the edge of your Windows screen showing your Claude 5-hour / weekly limits, token usage and activity. 停在螢幕邊緣的 Claude 用量面板。",
+  "main": "src/main.js",
+  "private": true,
+  "author": "andyk9885-ux",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyk9885-ux/claude-usage-hud.git"
+  },
+  "homepage": "https://github.com/andyk9885-ux/claude-usage-hud",
+  "scripts": {
+    "start": "electron .",
+    "demo": "node -e \"process.env.HUD_DEMO='1';require('child_process').spawn(require('electron'),['.'],{stdio:'inherit',env:process.env})\"",
+    "icon": "node scripts/make-icon.js",
+    "pack": "node scripts/make-icon.js && node scripts/build.js",
+    "release": "npm run pack && node scripts/release.js",
+    "install-app": "node scripts/install.js"
+  },
+  "devDependencies": {
+    "@electron/asar": "^4.3.1",
+    "electron": "^44.9.1"
+  }
+}
