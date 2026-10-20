@@ -109,6 +109,13 @@ Test switches · 測試用環境變數: `HUD_DEMO=1` demo data · `HUD_SHOT=<dir
 The usage cache and settings live in `%APPDATA%\claude-hud-zh\`.
 用量快取和設定存在 `%APPDATA%\claude-hud-zh\`。
 
+## Contact · 聯絡
+
+Questions, bug reports or ideas · 問題、錯誤回報或建議：
+
+- Email: [andyk9885@gmail.com](mailto:andyk9885@gmail.com)
+- GitHub Issues: [github.com/andyk9885-ux/claude-usage-hud/issues](https://github.com/andyk9885-ux/claude-usage-hud/issues)
+
 ## License
 
 [MIT](LICENSE)

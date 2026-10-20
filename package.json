@@ -5,7 +5,11 @@
   "description": "A small panel on the edge of your Windows screen showing your Claude 5-hour / weekly limits, token usage and activity. 停在螢幕邊緣的 Claude 用量面板。",
   "main": "src/main.js",
   "private": true,
-  "author": "andyk9885-ux",
+  "author": "andyk9885-ux <andyk9885@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/andyk9885-ux/claude-usage-hud/issues",
+    "email": "andyk9885@gmail.com"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
